@@ -12,9 +12,11 @@ Add comments explaining each fix when you're done.
 def calculate_bmi(weight_kg, height_cm):
     """Calculate BMI from weight (kg) and height (cm)."""
     height_m = height_cm / 100
-    bmi = weight_kg / height_m
+    bmi = weight_kg / (height_m ** 2)
     return bmi
-
+#BUG 1: Used weight/height instead of weight/(height**2)
+    # FIX: Added exponent for correct BMI formula
+    # bmi = weight / (height ** 2)
 
 def get_risk_level(bmi):
     """Determine health risk level based on BMI."""
@@ -27,8 +29,9 @@ def get_risk_level(bmi):
     else:
         risk_lvl = "High risk (obese)"
 
-    return risk_level
-
+    return risk_lvl
+#BUG 2: Used risk_level(which was not defined) instead of risk_lvl
+    # FIX: Replaced returned variable with correct variable name risk_lvl
 
 def analyze_patient_data(patients):
     """Analyze BMI and risk for multiple patients."""
@@ -37,7 +40,9 @@ def analyze_patient_data(patients):
 
     results = []
 
-    for i in range(len(patients) - 1):
+    for i in range(len(patients)):
+    #BUG3: Loop iterates to len(patients) - 1, missing last patient
+    # FIX: Changed loop to iterate through full range of patients (removed -1)
         name, weight, height = patients[i]
         bmi = calculate_bmi(weight, height)
         risk = get_risk_level(bmi)
